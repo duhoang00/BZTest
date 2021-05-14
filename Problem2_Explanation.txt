@@ -1,0 +1,13 @@
+Logic Explanation:
+*Problem solver function gonna be 'solveProblem2'*
+1. We will go from the first node (the root) and check if it is even-value, if it is
+we will add its grand node value to sum
+2. After that we will check the left, right node and repeat the same process
+*We need to check if node is null many times because I think it is neccessary*
+
+Performance:
+Not so good because I have to check if it is null or not a lot of time
+
+Performance Enhacing Way:
+Some way to check if it is null or not from farer node that we do not have to
+get in the node to check

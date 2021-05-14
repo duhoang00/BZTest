@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <h1>Problem 1</h1>
+</head>
+
+<body>
+  <title>Problem 1</title>
+  <h2>Give an array</h2>
+  <div>
+    <input id="arrayInput" type="text" placeholder="Ex:3,1,3,3,5,1,1" value="3,1,3,3,5,1,1" onkeypress="press(event)"
+      autofocus />
+    <button id="solveButton" onclick="solve()">Solve</button>
+  </div>
+  <h2>Result</h2>
+  <div id="result"></div>
+</body>
+<script>
+  function press(e) {
+    if (e.keyCode == 13) {
+      solve();
+    }
+  }
+
+  function solve() {
+    var array = document.getElementById("arrayInput").value.split(",");
+    var result;
+
+    for (var i = 0; i < array.length - 1; i++) {
+      var flag_dup = false;
+      for (var j = i + 1; j < array.length; j++) {
+        if (array[i] === array[j]) {
+          
+          flag_dup = true;
+          break;
+        }
+      }
+      if (flag_dup == false) {
+        result = array[i];
+      }
+    }
+
+    document.getElementById("result").innerHTML = result;
+  }
+</script>
+
+</html>
