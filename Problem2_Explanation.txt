@@ -6,7 +6,8 @@ we will add its grand node value to sum
 *We need to check if node is null many times because I think it is neccessary*
 
 Performance:
-Not so good because I have to check if it is null or not a lot of time
+Time: 0.28499999825726263
+Space complexity: O(2^n)
 
 Performance Enhacing Way:
 Some way to check if it is null or not from farer node that we do not have to

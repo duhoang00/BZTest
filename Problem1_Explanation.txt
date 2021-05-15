@@ -1,12 +1,11 @@
 Logic Explanation:
-1. First loop from i to array length - 1
-2. Inside that loop gonna be another loop from i + 1 to array length
-3. We gonna check if element of first loop is equal to the element of the second loop,
-if it is true the flag gonna be true and exit the loop because that is the duplicate element
-4. If there is any member with FALSE flag, it is the result
+1. Create an uniqe array constains element of base array but without duplicate elements
+2. Create an duplicate array constains duplicate element of base array
+3. Go through every elemetn of uniqe array and check if it is in duplicate array, if not that will be the result
 
 Performance:
-Not gonna be so good because the first loop have to loop through some same elements for at least 3 times 
+Time: 0.04999999873689376
+Space complexity: 0(N)
 
 Performance Enhacing Way:
-Can use some es6's way like filter to create an array of duplicate element and do something more with it
+May be 1 filter only?

@@ -3,100 +3,96 @@
 
 <head>
     <h1>Problem 2</h1>
+
 </head>
 
 <body>
     <title>Problem 2</title>
     <h2>Give an binary tree</h2>
     <div>
-        <input id="arrayInput" type="text" placeholder="Ex:1,2,3"
-            value="6,7,8,2,7,1,3,9,null,1,4,null,null,null,5" onkeypress="press(event)" autofocus />
+        <input id="arrayInput" type="text" placeholder="Ex:1,2,3" value="6,7,8,2,7,1,3,9,null,1,4,null,null,null,5"
+            onkeypress="press(event)" autofocus />
         <button id="solveButton" onclick="solve()">Solve</button>
     </div>
     <h2>Result</h2>
     <div id="result"></div>
 </body>
 <script>
-    function press(e) {
-        if (e.keyCode == 13) {
-            solve();
-        }
-    }
-
-    function solve() {
-        var array = document.getElementById("arrayInput").value.split(",");
-
-        tree = new Tree();
-        tree.root = tree.insert2Tree(array, tree.root, 0);
-
-        tree.solveProblem2(tree.root, 0, array[array.length - 1]);
-    }
-
-    class Node {
+    class Node { // eslint-disable-line no-unused-vars
         constructor(data) {
             this.data = data;
             this.left = null;
             this.right = null;
         }
     }
-
-    class Tree {
+</script>
+<script>
+    class Tree { // eslint-disable-line no-unused-vars
         constructor() {
             this.root = null;
         }
 
         insert2Tree(arr, node, index) {
+            let rootNode = node;
             if (index < arr.length) {
-                var tmpNode = new Node(arr[index]);
-                node = tmpNode;
+                const tmpNode = new Node(arr[index]);
+                rootNode = tmpNode;
 
-                node.left = this.insert2Tree(arr, node.left, 2 * index + 1);
-                node.right = this.insert2Tree(arr, node.right, 2 * index + 2);
+                rootNode.left = this.insert2Tree(arr, rootNode.left, 2 * index + 1);
+                rootNode.right = this.insert2Tree(arr, rootNode.right, 2 * index + 2);
             }
-            return node;
+            return rootNode;
         }
 
         solveProblem2(node, sum, lastNode) {
+            let resultSum = sum;
             if (node !== null) {
-                if (node.data % 2 == 0) {
+                if (node.data % 2 === 0) {
                     if (node.left !== null) {
-                        if (this.checkNodeNotNull(node.left.left)) {
-                            sum += parseInt(node.left.left.data);
+                        if (node.left.left && node.left.left.data !== 'null') {
+                            resultSum += parseInt(node.left.left.data, 10);
                         }
-                        if (this.checkNodeNotNull(node.left.right)) {
-                            sum += parseInt(node.left.right.data);
+                        if (node.left.right && node.left.right.data !== 'null') {
+                            resultSum += parseInt(node.left.right.data, 10);
                         }
                     }
                     if (node.right !== null) {
-                        if (this.checkNodeNotNull(node.right.left)) {
-                            sum += parseInt(node.right.left.data);
+                        if (node.right.left && node.right.left.data !== 'null') {
+                            resultSum += parseInt(node.right.left.data, 10);
                         }
-                        if (this.checkNodeNotNull(node.right.right)) {
-                            sum += parseInt(node.right.right.data);
+                        if (node.right.right && node.right.right.data !== 'null') {
+                            resultSum += parseInt(node.right.right.data, 10);
                         }
                     }
-
                 }
-                this.solveProblem2(node.left, sum, lastNode);
-                this.solveProblem2(node.right, sum, lastNode);
+                this.solveProblem2(node.left, resultSum, lastNode);
+                this.solveProblem2(node.right, resultSum, lastNode);
                 if (node.left === null && node.right === null && node.data === lastNode) {
-                    this.printProblem2Result(sum);
+                    document.getElementById('result').innerHTML = resultSum;
                 }
             }
-            
         }
+    }
+</script>
+<script>
+    function solve() {
+        const start = performance.now();
 
-        printProblem2Result(result) {
-            document.getElementById("result").innerHTML = result;
+        const array = document.getElementById('arrayInput').value.split(',');
+
+        const tree = new Tree(); // eslint-disable-line no-undef
+        tree.root = tree.insert2Tree(array, tree.root, 0);
+
+        tree.solveProblem2(tree.root, 0, array[array.length - 1]);
+
+        const end = performance.now();
+        console.log(end - start);
+    }
+
+    function press(e) { // eslint-disable-line no-unused-vars
+        if (e.keyCode === 13) {
+            solve();
         }
-
-        checkNodeNotNull(node) {
-            if (node && node.data && node.data !== 'null') {
-                return true;
-            }
-            return false;
-        }
-
     }
 </script>
 

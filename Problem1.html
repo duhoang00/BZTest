@@ -17,31 +17,30 @@
   <div id="result"></div>
 </body>
 <script>
-  function press(e) {
-    if (e.keyCode == 13) {
-      solve();
+  function solve() {
+    const start = performance.now();
+
+    const array = document.getElementById('arrayInput').value.split(',');
+    const uniqeArr = array.filter((el, i) => (array.indexOf(el) === i));
+    const dupArr = array.filter((el, i) => (array.indexOf(el) !== i));
+    let result;
+    for (let i = 0; i < uniqeArr.length; i += 1) {
+      if (dupArr.indexOf(uniqeArr[i]) === -1) {
+        result = uniqeArr[i];
+        break;
+      }
     }
+
+    const end = performance.now();
+    console.log(end - start);
+
+    document.getElementById('result').innerHTML = result;
   }
 
-  function solve() {
-    var array = document.getElementById("arrayInput").value.split(",");
-    var result;
-
-    for (var i = 0; i < array.length - 1; i++) {
-      var flag_dup = false;
-      for (var j = i + 1; j < array.length; j++) {
-        if (array[i] === array[j]) {
-          
-          flag_dup = true;
-          break;
-        }
-      }
-      if (flag_dup == false) {
-        result = array[i];
-      }
+  function press(e) { // eslint-disable-line no-unused-vars
+    if (e.keyCode === 13) {
+      solve();
     }
-
-    document.getElementById("result").innerHTML = result;
   }
 </script>
 
